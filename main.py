@@ -20,13 +20,13 @@ class Blog(db.Model):
         self.blog = blog
 
 def title_validate(b_title):
-    if b_title == None:
+    if b_title == "":
         return "enter a title"
     else:
         return ""
 
 def blog_validate(blog):
-    if blog == None:
+    if blog == "":
         return "please enter a paragraph"
     else:
         return ""
@@ -49,8 +49,8 @@ def index():
 @app.route('/newpost', methods=['GET', 'POST'])
 def new_blog():
     if request.method == 'POST':
-        b_title = request.form.get('name')
-        blog = request.form.get('content')
+        b_title = request.form.get('b_title')
+        blog = request.form.get('blog')
         if title_validate(b_title) or blog_validate(blog) != "":
             return render_template('newpost.html', title="Enter new blog", title_error=title_validate(b_title), c_error=blog_validate(blog), old_name=b_title, old_entry=blog)
         else:
